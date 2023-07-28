@@ -1,0 +1,110 @@
+<html>
+
+<head>
+    <title>
+        Todo list
+    </title>
+    <style>
+        .box {
+            border: 2px solid;
+            width: 35%;
+            margin: auto;
+            margin-top: 300px;
+            padding: 10px;
+            background-color: powderblue;
+        }
+
+        .box {
+            list-style-type: none;
+            padding: none;
+        }
+
+        .box input,
+        button,
+        span,
+        li {
+            height: 30px;
+        }
+
+        .button_plus {
+            color: #fff;
+            background-color: #944fcc;
+            margin: none;
+            border: none;
+            width: 30px;
+            font-size: 19px;
+            float: right;
+        }
+
+        .button_plus:hover {
+            background-color: #fff;
+            color: #8e4ce7;
+        }
+
+        .button_delete {
+            color: #fff;
+            background-color: powderblue;
+            margin: none;
+            border: none;
+            width: 30px;
+            font-size: 19px;
+            float: right;
+        }
+
+        .button_delete:hover {
+            background-color: #fff;
+            color: #43e9ec;
+        }
+
+        .button_clear {
+            width: auto;
+        }
+
+        .input_todo {
+            width: 90%;
+            margin: none;
+        }
+
+        .input_todo:focus {
+            margin: none;
+            border: 1px solid #8e4ce7;
+        }
+
+
+
+        body {
+            /* background: linear-gradient(-45deg, #b52deb, #e73c7e, #23a6d5, #23d5ab); */
+            margin: 0;
+            background-color:tomato ;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <form method="post" action="">
+
+            {% csrf_token %}
+            <h1 style="text-align: center;">Bucket list</h1>
+            <ul>
+                <input class='input_todo' placeholder="Enter your new todo" type="text" name="entry">
+                <button class="button_plus" formaction="/todoadd/" type="submit">+</button>
+            </ul>
+            {% for i in todo %}
+            <ul>
+                {{i.entry}}
+                <button class="button_delete" formaction="/delete/{{ i.id }}">👍</button>
+            </ul>
+            {% endfor %}
+
+            <ul>
+                {{ todo.count }} missions remaining
+                <button class="button_plus button_clear" formaction="/delete/" type="submit">mission completed🫡</button>
+            </ul>
+
+        </form>
+    </div>
+</body>
+
+</html>
